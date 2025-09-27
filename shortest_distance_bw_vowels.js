@@ -29,27 +29,32 @@ Write a program that takes a single word (string) as input and finds the **short
 --- */
 
 function findShortDistance(string) {
-  let currentVowelIndex = 0;
-  let nextVowelIndex = 0;
+  let currentVowelIndex = -1;
+  let nextVowelIndex = -1;
   let isVowelFound = false;
+  let shortDifference = 100;
   for (let index = 0; index < string.length; index++) {
-    
     if (string[index] === "a" || string[index] === "e" || string[index] === "i" || string[index] === "o" || string[index] === "u") {
       if (!isVowelFound) {
         currentVowelIndex = index;
         isVowelFound = true;
-      }
-      if (isVowelFound) {
+      } else {
         nextVowelIndex = index;
       }
-    }
 
+      if (currentVowelIndex !== -1 && nextVowelIndex !== -1) {
+        shortDifference = (shortDifference > nextVowelIndex - currentVowelIndex) ? nextVowelIndex - currentVowelIndex : shortDifference;
+        currentVowelIndex = nextVowelIndex;
+      }
+    }
   }
-  const difference = (nextVowelIndex - currentVowelIndex) - 1;
-  return difference;
+  if (nextVowelIndex === -1) {
+    return -1;
+  }
+  return shortDifference;
 }
 
-function pragmantMessage(string, distance, expected) {
+function fragmantMessage(string, distance, expected) {
   let message = (distance === expected) ? "✅ " : "❌ ";
   message += " shortest distance between vowels in the " + string;;
   message += " it should be " + distance + " and it is " + expected;
@@ -58,7 +63,7 @@ function pragmantMessage(string, distance, expected) {
 
 function checkDistanceBetweenVowels(string, expected) {
   const shortestDistance = findShortDistance(string);
-  const message = pragmantMessage(string, shortestDistance, expected);
+  const message = fragmantMessage(string, shortestDistance, expected);
   console.log(message);
 }
 
@@ -66,5 +71,11 @@ checkDistanceBetweenVowels("ab", -1);
 checkDistanceBetweenVowels("a", -1);
 checkDistanceBetweenVowels("abc", -1);
 checkDistanceBetweenVowels("abcd", -1);
-checkDistanceBetweenVowels("abed", 1);
-checkDistanceBetweenVowels("cabed", 1);
+checkDistanceBetweenVowels("abed", 2);
+checkDistanceBetweenVowels("cabed", 2);
+checkDistanceBetweenVowels("hello", 3);
+checkDistanceBetweenVowels("beauty", 1);
+checkDistanceBetweenVowels("umbrella", 3);
+checkDistanceBetweenVowels("beautiful", 1);
+
+
