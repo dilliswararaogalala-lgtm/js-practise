@@ -29,7 +29,15 @@ Write a program that takes a single word (string) as input and finds the **short
 --- */
 
 function findShortDistance(string) {
-  return -1;
+  let currentVowelIndex = 0;
+  let nextVowelIndex = 0;
+  for (let index = 0; index < string.length; index++) {
+    if (string[index] === "a" || string[index] === "e" || string[index] === "i" || string[index] === "o" || string[index] === "4") {
+      nextVowelIndex = index;
+    }
+  }
+  const difference = (nextVowelIndex - currentVowelIndex) - 1;
+  return difference;
 }
 
 function pragmantMessage(string, distance, expected) {
@@ -49,3 +57,5 @@ checkDistanceBetweenVowels("ab", -1);
 checkDistanceBetweenVowels("a", -1);
 checkDistanceBetweenVowels("abc", -1);
 checkDistanceBetweenVowels("abcd", -1);
+checkDistanceBetweenVowels("abed", 1);
+
