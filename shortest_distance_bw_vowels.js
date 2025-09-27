@@ -31,10 +31,19 @@ Write a program that takes a single word (string) as input and finds the **short
 function findShortDistance(string) {
   let currentVowelIndex = 0;
   let nextVowelIndex = 0;
+  let isVowelFound = false;
   for (let index = 0; index < string.length; index++) {
-    if (string[index] === "a" || string[index] === "e" || string[index] === "i" || string[index] === "o" || string[index] === "4") {
-      nextVowelIndex = index;
+    
+    if (string[index] === "a" || string[index] === "e" || string[index] === "i" || string[index] === "o" || string[index] === "u") {
+      if (!isVowelFound) {
+        currentVowelIndex = index;
+        isVowelFound = true;
+      }
+      if (isVowelFound) {
+        nextVowelIndex = index;
+      }
     }
+
   }
   const difference = (nextVowelIndex - currentVowelIndex) - 1;
   return difference;
@@ -58,4 +67,4 @@ checkDistanceBetweenVowels("a", -1);
 checkDistanceBetweenVowels("abc", -1);
 checkDistanceBetweenVowels("abcd", -1);
 checkDistanceBetweenVowels("abed", 1);
-
+checkDistanceBetweenVowels("cabed", 1);
