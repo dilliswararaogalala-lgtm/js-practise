@@ -28,12 +28,20 @@ Write a program that takes a single word (string) as input and finds the **short
 
 --- */
 
-function distanceBetweenVowels(string) {
+function findShortDistance(string) {
   return -1;
 }
 
 function checkDistanceBetweenVowels(string, expected) {
+  const shortestDistance = findShortDistance(string);
+  const message = (shortestDistance === expected) ? "✅" : "❌";
+  const printText = " shortest distance between vowels in the " + string;
+  const printOutput = " it should be " + shortestDistance + " and it is " + expected;
+  console.log(message, printText, printOutput);
 
 }
 
-checkDistanceBetweenVowels("ab", -1)
+checkDistanceBetweenVowels("ab", -1);
+checkDistanceBetweenVowels("a", -1);
+checkDistanceBetweenVowels("abc", -1);
+checkDistanceBetweenVowels("abcd", -1);
