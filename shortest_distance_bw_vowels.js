@@ -67,15 +67,19 @@ function checkDistanceBetweenVowels(string, expected) {
   console.log(message);
 }
 
-checkDistanceBetweenVowels("ab", -1);
-checkDistanceBetweenVowels("a", -1);
-checkDistanceBetweenVowels("abc", -1);
-checkDistanceBetweenVowels("abcd", -1);
-checkDistanceBetweenVowels("abed", 2);
-checkDistanceBetweenVowels("cabed", 2);
-checkDistanceBetweenVowels("hello", 3);
-checkDistanceBetweenVowels("beauty", 1);
-checkDistanceBetweenVowels("umbrella", 3);
-checkDistanceBetweenVowels("beautiful", 1);
+function testAll() {
+  checkDistanceBetweenVowels("ab", -1);
+  checkDistanceBetweenVowels("a", -1);
+  checkDistanceBetweenVowels("abc", -1);
+  checkDistanceBetweenVowels("abcd", -1);
+  checkDistanceBetweenVowels("abed", 2);
+  checkDistanceBetweenVowels("cabed", 2);
+  checkDistanceBetweenVowels("hello", 3);
+  checkDistanceBetweenVowels("beauty", 1);
+  checkDistanceBetweenVowels("umbrella", 3);
+  checkDistanceBetweenVowels("beautiful", 1);
+}
+
+testAll();
 
 
