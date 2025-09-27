@@ -32,13 +32,17 @@ function findShortDistance(string) {
   return -1;
 }
 
+function pragmantMessage(string, distance, expected) {
+  let message = (distance === expected) ? "✅ " : "❌ ";
+  message += " shortest distance between vowels in the " + string;;
+  message += " it should be " + distance + " and it is " + expected;
+  return message;
+}
+
 function checkDistanceBetweenVowels(string, expected) {
   const shortestDistance = findShortDistance(string);
-  const message = (shortestDistance === expected) ? "✅" : "❌";
-  const printText = " shortest distance between vowels in the " + string;
-  const printOutput = " it should be " + shortestDistance + " and it is " + expected;
-  console.log(message, printText, printOutput);
-
+  const message = pragmantMessage(string, shortestDistance, expected);
+  console.log(message);
 }
 
 checkDistanceBetweenVowels("ab", -1);
