@@ -31,19 +31,20 @@ Write a program that takes a single word (string) as input and finds the **short
 function findShortDistance(string) {
   let currentVowelIndex = -1;
   let nextVowelIndex = -1;
-  let isVowelFound = false;
-  let shortDifference = 100;
+  let shortDistance = 100;
+
   for (let index = 0; index < string.length; index++) {
+
     if (string[index] === "a" || string[index] === "e" || string[index] === "i" || string[index] === "o" || string[index] === "u") {
-      if (!isVowelFound) {
+
+      if (currentVowelIndex === -1) {
         currentVowelIndex = index;
-        isVowelFound = true;
       } else {
         nextVowelIndex = index;
       }
 
       if (currentVowelIndex !== -1 && nextVowelIndex !== -1) {
-        shortDifference = (shortDifference > nextVowelIndex - currentVowelIndex) ? nextVowelIndex - currentVowelIndex : shortDifference;
+        shortDistance = (shortDistance > nextVowelIndex - currentVowelIndex) ? nextVowelIndex - currentVowelIndex : shortDistance;
         currentVowelIndex = nextVowelIndex;
       }
     }
@@ -51,7 +52,7 @@ function findShortDistance(string) {
   if (nextVowelIndex === -1) {
     return -1;
   }
-  return shortDifference;
+  return shortDistance;
 }
 
 function fragmantMessage(string, distance, expected) {
