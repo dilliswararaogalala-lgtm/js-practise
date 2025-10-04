@@ -28,15 +28,24 @@ function createSubstring(string, length, otherString) {
   return otherString += string.at(length) + createSubstring(string, length + 1, otherString);
 }
 
-function checkEndsWith(string, substring, expectedOutput) {
-  const actualValue = endsWith(string, substring);
-  const resultMessage = (actualValue === expectedOutput) ? "✅" : "❌";
-  console.log(resultMessage, string, "ends with ", substring, "should be ", actualValue, "and it is ", expectedOutput);
+function createMessage(discrip, substring, actualValue, expected) {
+  const isTrue = expected === actualValue;
+  const symbol = isTrue ? "✅" : "❌";
+  let dataPoints = "=> " + "substring: " + substring + "\n";
+  dataPoints += " => " + "output: " + actualValue + "\n";
+  const message = isTrue ? `${symbol} ${discrip}` : `${symbol} ${discrip} \n ${dataPoints}`;
+  return message;
 }
 
-checkEndsWith("hello world", "ld", true);
-checkEndsWith("hii dilli", "dilli", true);
-checkEndsWith("namastae babu", "abu", true);
-checkEndsWith("namstae ganesh", "esh", true);
-checkEndsWith("namo namaha", " ", false);
-checkEndsWith("ojas gambheera", "gambhera", true);
+function checkEndsWith(discrip, string, substring, expectedOutput) {
+  const isEndsWith = endsWith(string, substring);
+  const resultMessage = createMessage(discrip, substring, isEndsWith, expectedOutput);
+  console.log(resultMessage);
+}
+
+checkEndsWith("substring of length 2 at end", "hello world", "ld", true);
+checkEndsWith("substring of length 5 at end", "hii dilli", "dilli", true);
+checkEndsWith("substring of length 3 at end", "namastae babu", "abu", true);
+checkEndsWith("substring of length 3 at end", "namstae ganesh", "esh", true);
+checkEndsWith("find space as a substring at end", "namo namaha", " ", false);
+checkEndsWith("misspelled substring in given string", "ojas gambheera", "gambhera", false);
