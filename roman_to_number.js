@@ -1,5 +1,20 @@
 function convertRomanNumbers(string) {
-  return 1;
+  switch (string) {
+    case 'I':
+      return 1;
+    case "V":
+      return 5;
+    case "X":
+      return 10;
+    case "L":
+      return 50;
+    case "C":
+      return 100;
+    case "D":
+      return 500;
+    case "M":
+      return 1000;
+  }
 }
 
 function createMessage(discrip, romanValue, numericalValue, expected) {
@@ -21,3 +36,8 @@ function testRomanNumbers(discrip, romanNumber, expected) {
 
 testRomanNumbers("roman number of 1", "I", 1);
 testRomanNumbers("roman number of 5", "V", 5);
+testRomanNumbers("roman number of 10", "X", 10);
+testRomanNumbers("roman number of 50", "L", 50);
+testRomanNumbers("roman number of 100", "C", 100);
+testRomanNumbers("roman number of 500", "D", 500);
+testRomanNumbers("roman number of 1000", "M", 1000);
