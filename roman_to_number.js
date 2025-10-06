@@ -14,6 +14,8 @@ function convertRomanNumbers(string) {
       return 500;
     case "M":
       return 1000;
+    default:
+      return 2;
   }
 }
 
@@ -35,6 +37,7 @@ function testRomanNumbers(discrip, romanNumber, expected) {
 }
 
 testRomanNumbers("roman number of 1", "I", 1);
+testRomanNumbers("roman number of 2", "II", 2);
 testRomanNumbers("roman number of 5", "V", 5);
 testRomanNumbers("roman number of 10", "X", 10);
 testRomanNumbers("roman number of 50", "L", 50);
