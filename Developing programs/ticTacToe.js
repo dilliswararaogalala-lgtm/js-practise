@@ -1,11 +1,7 @@
 const BOARD = ["⬜️", "⬜️", "⬜️", "⬜️", "⬜️", "⬜️", "⬜️", "⬜️", "⬜️"];
 const WIN_SETS = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]];
 const SYMBOLS = ["❌", "⭕️"];
-const USERS = [];
-
-function createNextLine() {
-  return console.log();
-}
+const users = [];
 
 function printBoard() {
   let string = "";
@@ -17,16 +13,8 @@ function printBoard() {
     string += BOARD[index];
   }
 
-  console.log(string);
-  createNextLine();
-}
-
-function getUserTurn(USERS, order = 1) {
-  return USERS[order - 1];
-}
-
-function getSymbol(SYMBOLS, order = 1) {
-  return SYMBOLS[order - 1];
+  console.log(`${string} \n`);
+  console.log();
 }
 
 function isValid(numberAsString) {
@@ -34,60 +22,66 @@ function isValid(numberAsString) {
   return number > 0 && number < 10 && BOARD[number - 1].includes("⬜️");
 }
 
-function isHeWon(WIN_SETS, symbol) {
-  let firstNumber = false;
-  let secondNumber = false;
-  let thirdNumber = false;
+function isUserWon(WIN_SETS, symbol) {
 
   for (let index = 0; index < WIN_SETS.length; index++) {
     const sets = WIN_SETS[index];
-    firstNumber = BOARD[sets[0]] === symbol;
-    secondNumber = BOARD[sets[1]] === symbol;
-    thirdNumber = BOARD[sets[2]] === symbol;
+    const firstNumber = BOARD[sets[0]] === symbol;
+    const secondNumber = BOARD[sets[1]] === symbol;
+    const thirdNumber = BOARD[sets[2]] === symbol;
     if (firstNumber && secondNumber && thirdNumber) return true;
   }
 
   return false;
 }
 
-function isGameOver() {
-  return !BOARD.includes("⬜️");
+function updatePositionOnBoard(cellNumber, symbol) {
+  BOARD[cellNumber - 1] = symbol;
+  console.clear();
+  printBoard();
 }
 
-function ticTacToe() {
-  let order = 1;
-  let isWon = false;
-  let isDraw = false;
-  USERS.push(prompt('enter player 01 name:'));
-  USERS.push(prompt('enter player 02 name:'));
-
-  while (!isWon && !isDraw) {
-    const user = getUserTurn(USERS, order);
-    const symbol = getSymbol(SYMBOLS, order);
-    console.log(`It is ${user}'s turn ${symbol}`);
-    const cellNumber = prompt("enter the cell no:");
-
-    if (isValid(cellNumber)) {
-      BOARD[cellNumber - 1] = symbol;
-      console.clear();
-      console.log(`${isHeWon(WIN_SETS, symbol)}`);
-      printBoard();
-      order = order === 1 ? 2 : 1;
-    } else {
-      console.log("INVALID INPUT");
-      continue;
-    }
-
-    if (isHeWon(WIN_SETS, symbol)) {
-      console.log(`${user} won`);
-      isWon = true;
-    }
-
-    if (isGameOver()) {
-      console.log(`its draw`);
-      isDraw = true;
-    }
+function findWhoWon(user, symbol) {
+  if (isUserWon(WIN_SETS, symbol)) {
+    console.log(`🤪 ${user} won`);
+    return true;
   }
 }
 
-ticTacToe();
+function isGameDraw() {
+  if (!BOARD.includes("⬜️")) {
+    console.log(`😝 it's draw`);
+    return true;
+  }
+}
+
+function startTicTacToe(isWon, isDraw, order) {
+  while (!isWon && !isDraw) {
+    const user = users[order - 1];
+    const symbol = SYMBOLS[order - 1];
+    console.log(`\nIt is ${user}'s turn ${symbol}\n`);
+    const cellNumber = prompt("enter the cell no:");
+
+    if (isValid(cellNumber)) {
+      updatePositionOnBoard(cellNumber, symbol);
+      order = order === 1 ? 2 : 1
+    } else {
+      console.log("\nINVALID INPUT");
+      prompt("\nenter to continue....");
+      console.clear();
+      printBoard();
+      continue;
+    }
+
+    isWon = findWhoWon(user, symbol);
+    if (!isWon) isDraw = isGameDraw();
+  }
+}
+
+function main() {
+  users.push(prompt('\nenter player 01 name:'));
+  users.push(prompt('\nenter player 02 name:'));
+  startTicTacToe(false, false, 1);
+}
+
+main();
