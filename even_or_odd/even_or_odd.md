@@ -4,6 +4,7 @@ Even : Even number is only divisible by 2
 Odd  : Odd number is not divisible by 2
 
 | Input  | Expected Output |
+| ----  | ----|
 |  1     | 1 is an odd number|
 |  2     | 2 is an even number|
 |  3     | 3 is an odd number|
