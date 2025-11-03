@@ -28,10 +28,10 @@ function cowsAndBullsGame(secretNumber, chances, cows, bulls) {
     const guessedNumber = prompt('\nenter your  number:').split('');
     const isValidOrNot = isValid(guessedNumber);
     if (isValidOrNot) {
+
       for (let index = 0; index < guessedNumber.length; index++) {
         if (secretNumber.includes(guessedNumber[index])) {
-          const indexOfNumber = (guessedNumber.indexOf(guessedNumber[index]));
-          if (secretNumber[indexOfNumber] === guessedNumber[index]) {
+          if (secretNumber[index] === guessedNumber[index]) {
             bulls++;
           } else {
             cows++;
