@@ -6,6 +6,18 @@ function encodeString(data) {
   return `${data.length}:${data}`;
 }
 
+function formatEncodedArray(encodedData) {
+  return `l${encodedData}e`;
+}
+
+function encodeArray(data) {
+  const encodedArray = [];
+  for (let index = 0; index < data.length; index++) {
+    encodedArray.push(encode(data[index]));
+  }
+  return formatEncodedArray(encodedArray.join(''));
+}
+
 function encode(data) {
   const typeOfData = typeof data;
   switch (typeOfData) {
@@ -13,6 +25,8 @@ function encode(data) {
       return encodeIntegers(data);
     case 'string':
       return encodeString(data);
+    case 'object':
+      return encodeArray(data);
   }
 }
 
@@ -61,5 +75,21 @@ function testForStrings() {
   testEncode("special characters", 'special!@#$chars', '16:special!@#$chars');
 }
 
-testForIntegers();
-testForStrings();
+function testForArrays() {
+  console.log(underline('ARRAYS'));
+  testEncode("array with numbers", [1, 2], 'li1ei2ee');
+  testEncode("array with character", ['a'], 'l1:ae');
+  testEncode("array with characters", ['a', 'b'], 'l1:a1:be');
+  testEncode("multiple array", ['a', 'b', ['c']], 'l1:a1:bl1:cee');
+  testEncode("multiple array", ["", 0, []], "l0:i0elee");
+  testEncode("multiple array", [0, "", ["test"]], "li0e0:l4:testee");
+  testEncode("multiple array", ["one", ["two", ["three"]]], "l3:onel3:twol5:threeeee");
+}
+
+function testAll() {
+  testForIntegers();
+  testForStrings();
+  testForArrays();
+}
+
+testAll();
