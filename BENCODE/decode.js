@@ -1,5 +1,7 @@
-function decode() {
-  return 123;
+function decode(string) {
+  if (string[0] === 'i' && string[string.length - 1] === 'e') {
+    return parseInt(string.slice(1, string.length - 1));
+  }
 }
 
 function createMessage(descrip, symbol, expected, exactOutput) {
@@ -23,3 +25,6 @@ function testDecode(descrip, bencodedString, expected) {
 }
 
 testDecode('numeric bencoded string', "i123e", 123);
+testDecode('numeric bencoded string', "i321e", 321);
+testDecode('numeric bencoded string', "i-67e", -67);
+testDecode('numeric bencoded string', "i0e", 0);
