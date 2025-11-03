@@ -2,11 +2,17 @@ function encodeIntegers(data) {
   return `i${data}e`;
 }
 
+function encodeString(data) {
+  return `${data.length}:${data}`;
+}
+
 function encode(data) {
   const typeOfData = typeof data;
   switch (typeOfData) {
     case 'number':
       return encodeIntegers(data);
+    case 'string':
+      return encodeString(data);
   }
 }
 
@@ -38,7 +44,7 @@ function underline(string) {
   return `\n${string}\n${repeatChar("-", string.length)}\n`
 }
 
-function testIntegers() {
+function testForIntegers() {
   console.log(underline('INTEGERS'));
   testEncode("positive integer", 123, 'i123e');
   testEncode("positive integer", 423, 'i423e');
@@ -46,4 +52,14 @@ function testIntegers() {
   testEncode("negative integer", -675, 'i-675e');
 }
 
-testIntegers();
+function testForStrings() {
+  console.log(underline('STRINGS'));
+  testEncode("numeric string", `123`, '3:123');
+  testEncode("greeting message", 'hello', '5:hello');
+  testEncode("empty string", '', '0:');
+  testEncode("fruit name", 'apple', '5:apple');
+  testEncode("special characters", 'special!@#$chars', '16:special!@#$chars');
+}
+
+testForIntegers();
+testForStrings();
