@@ -2,10 +2,16 @@ function decodeNumber(string) {
   return parseInt(string.slice(1, string.length - 1));
 }
 
+function decodeString(string) {
+  return string.slice(string.indexOf(':') + 1, string.length);
+}
+
 function decode(string) {
-  let typeOfBencodedStr = '';
   if (string[0] === 'i' && string[string.length - 1] === 'e') {
     return decodeNumber(string);
+  }
+  if (string.includes(':')) {
+    return decodeString(string);
   }
 }
 
@@ -45,4 +51,13 @@ function testForNumericBencode() {
   testDecode('numeric bencoded string', "i0e", 0);
 }
 
+function testForStringBencode() {
+  console.log(underline("BENCODE"))
+  testDecode('bencoded string', "2:ab", 'ab');
+  testDecode('bencoded string', "10:dilliswara", 'dilliswara');
+  testDecode('empty bencoded string', "0:", '');
+  testDecode('greeting message', "11:hello world", 'hello world');
+}
+
 testForNumericBencode();
+testForStringBencode();
