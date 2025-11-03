@@ -1,5 +1,13 @@
-function encode(data) {
+function encodeIntegers(data) {
   return `i${data}e`;
+}
+
+function encode(data) {
+  const typeOfData = typeof data;
+  switch (typeOfData) {
+    case 'number':
+      return encodeIntegers(data);
+  }
 }
 
 function createMessage(descrip, symbol, expected, exactOutput) {
@@ -32,10 +40,10 @@ function underline(string) {
 
 function testIntegers() {
   console.log(underline('INTEGERS'));
-  testEncode("positive integer", '123', 'i123e');
-  testEncode("positive integer", '423', 'i423e');
-  testEncode("positive integer", '675', 'i675e');
-  testEncode("negative integer", '-675', 'i-675e');
+  testEncode("positive integer", 123, 'i123e');
+  testEncode("positive integer", 423, 'i423e');
+  testEncode("positive integer", 675, 'i675e');
+  testEncode("negative integer", -675, 'i-675e');
 }
 
 testIntegers();
