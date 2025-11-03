@@ -1,9 +1,25 @@
 function decode() {
-
+  return 123;
 }
 
-function testDecode() {
-
+function createMessage(descrip, symbol, expected, exactOutput) {
+  let dataPoints = `\n=> expected:\n${expected}\n`;
+  dataPoints += `=> decoded date:\n${exactOutput} \n`;
+  const withOutDataPoints = `${symbol}| ${descrip}`;
+  const withDataPoints = `${symbol}| ${descrip}${dataPoints}`;
+  const message = symbol === "✅" ? withOutDataPoints : withDataPoints;
+  return message;
 }
 
-testDecode();
+function getSymbol(expected, exactOutput) {
+  return expected === exactOutput ? "✅" : "❌";
+}
+
+function testDecode(descrip, bencodedString, expected) {
+  const decodedData = decode(bencodedString);
+  const symbol = getSymbol(expected, decodedData);
+  const message = createMessage(descrip, symbol, expected, decodedData);
+  console.log(message);
+}
+
+testDecode('numeric bencoded string', "i123e", 123);
