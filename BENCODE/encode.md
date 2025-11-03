@@ -6,9 +6,9 @@
 | `"hello"`                        | `"5:hello"`                       |
 | `""`                             | `"0:"`                            |
 | `"hello world"`                  | `"11:hello world"`                |
-| `"special!@#$chars"`             | `"14:special!@#$chars"`           |
+| `"special!@#$chars"`             | `"16:special!@#$chars"`           |
 | `["apple", 123, ["banana", -5]]` | `"l5:applei123el6:bananai-5eee"`  |
 | `[]`                             | `"le"`                            |
 | `[0, "", ["test"]]`              | `"li0e0:l4:testee"`               |
-| `["", 0, []]`                    | `"l0:i0ele"`                      |
+| `["", 0, []]`                    | `"l0:i0elee"`                      |
 | `["one", ["two", ["three"]]]`    | `"l3:onel3:twol5:threeeee"`       |
