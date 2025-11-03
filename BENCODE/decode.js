@@ -1,6 +1,11 @@
+function decodeNumber(string) {
+  return parseInt(string.slice(1, string.length - 1));
+}
+
 function decode(string) {
+  let typeOfBencodedStr = '';
   if (string[0] === 'i' && string[string.length - 1] === 'e') {
-    return parseInt(string.slice(1, string.length - 1));
+    return decodeNumber(string);
   }
 }
 
@@ -24,7 +29,20 @@ function testDecode(descrip, bencodedString, expected) {
   console.log(message);
 }
 
-testDecode('numeric bencoded string', "i123e", 123);
-testDecode('numeric bencoded string', "i321e", 321);
-testDecode('numeric bencoded string', "i-67e", -67);
-testDecode('numeric bencoded string', "i0e", 0);
+function repeatChar(char, noOfTimes) {
+  return char.repeat(noOfTimes);
+}
+
+function underline(string) {
+  return `\n${string}\n${repeatChar("-", string.length)}\n`
+}
+
+function testForNumericBencode() {
+  console.log(underline("NUMERIC BENCODE"))
+  testDecode('numeric bencoded string', "i123e", 123);
+  testDecode('numeric bencoded string', "i321e", 321);
+  testDecode('numeric bencoded string', "i-67e", -67);
+  testDecode('numeric bencoded string', "i0e", 0);
+}
+
+testForNumericBencode();
