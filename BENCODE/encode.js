@@ -22,6 +22,20 @@ function testEncode(descrip, data, expected) {
   console.log(message);
 }
 
-testEncode("positive integer", '123', 'i123e');
-testEncode("positive integer", '423', 'i423e');
-testEncode("positive integer", '675', 'i675e');
+function repeatChar(char, noOfTimes) {
+  return char.repeat(noOfTimes);
+}
+
+function underline(string) {
+  return `\n${string}\n${repeatChar("-", string.length)}\n`
+}
+
+function testIntegers() {
+  console.log(underline('INTEGERS'));
+  testEncode("positive integer", '123', 'i123e');
+  testEncode("positive integer", '423', 'i423e');
+  testEncode("positive integer", '675', 'i675e');
+  testEncode("negative integer", '-675', 'i-675e');
+}
+
+testIntegers();
