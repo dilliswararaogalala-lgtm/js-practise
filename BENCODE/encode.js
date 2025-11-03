@@ -1,5 +1,5 @@
-function encode() {
-  return 'i123e';
+function encode(data) {
+  return `i${data}e`;
 }
 
 function createMessage(descrip, symbol, expected, exactOutput) {
@@ -23,3 +23,5 @@ function testEncode(descrip, data, expected) {
 }
 
 testEncode("positive integer", '123', 'i123e');
+testEncode("positive integer", '423', 'i423e');
+testEncode("positive integer", '675', 'i675e');
