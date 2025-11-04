@@ -28,23 +28,15 @@ function getRandomData(numberOfElements) {
 }
 
 function getMedian(data) {
-  if (data.length % 2 === 0) {
-    const middleIndex = data.length / 2;
-    return (data[middleIndex] + data[(middleIndex) - 1]) / 2;
-  } else {
-    return data[(data.length - 1) / 2];
-  }
-}
-function benchMark(numberOfElements) {
-  console.log(`${numberOfElements} | ${numberOfTimes}`);
+  const sortedData = sort(data);
+  console.log(sortedData);
+  return sortedData[Math.floor(sortedData.length / 2)];
 }
 
 function main() {
-  const numberOfElements = 3;
+  const numberOfElements = 6;
   const data = getRandomData(numberOfElements);
-  const sortedData = sort(data);
-  benchMark(numberOfElements);
-  const medianOfData = getMedian(sortedData);
+  const medianOfData = getMedian(data);
   console.log(`median of the data: ${medianOfData}`);
 }
 
