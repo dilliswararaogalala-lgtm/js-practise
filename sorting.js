@@ -28,7 +28,7 @@ function getRandomData(numberOfElements) {
 }
 
 function benchMark(data, numberOfElements) {
-  sort(data);
+  const sortedData = sort(data);
   console.log(`${numberOfElements} | ${numberOfTimes}`);
 }
 
