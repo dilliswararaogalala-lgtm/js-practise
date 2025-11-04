@@ -27,15 +27,25 @@ function getRandomData(numberOfElements) {
   return data;
 }
 
-function benchMark(data, numberOfElements) {
-  const sortedData = sort(data);
+function getMedian(data) {
+  if (data.length % 2 === 0) {
+    const middleIndex = data.length / 2;
+    return (data[middleIndex] + data[(middleIndex) - 1]) / 2;
+  } else {
+    return data[(data.length - 1) / 2];
+  }
+}
+function benchMark(numberOfElements) {
   console.log(`${numberOfElements} | ${numberOfTimes}`);
 }
 
 function main() {
-  const numberOfElements = 100000;
+  const numberOfElements = 3;
   const data = getRandomData(numberOfElements);
-  benchMark(data, numberOfElements);
+  const sortedData = sort(data);
+  benchMark(numberOfElements);
+  const medianOfData = getMedian(sortedData);
+  console.log(`median of the data: ${medianOfData}`);
 }
 
 main();
