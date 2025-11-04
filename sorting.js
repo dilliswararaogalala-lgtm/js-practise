@@ -27,11 +27,15 @@ function getRandomData(numberOfElements) {
   return data;
 }
 
-const data = getRandomData(10);
-const sortedData = sort(data);
-
-for (let index = 0; index < sortedData.length; index++) {
-  console.log(sortedData[index]);
+function benchMark(data, numberOfElements) {
+  sort(data);
+  console.log(`${numberOfElements} | ${numberOfTimes}`);
 }
 
-console.log(`number of times:${numberOfTimes}`);
+function main() {
+  const numberOfElements = 100000;
+  const data = getRandomData(numberOfElements);
+  benchMark(data, numberOfElements);
+}
+
+main();
