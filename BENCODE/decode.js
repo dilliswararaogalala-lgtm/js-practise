@@ -1,29 +1,64 @@
-function decodeNumber(string) {
-  const slicedString = string.slice(string.indexOf('i') + 1, string.indexOf('e'));
+function decodeNumber(string, indexOfI, indexOfE) {
+  const slicedString = string.slice(indexOfI + 1, indexOfE);
   return parseInt(slicedString);
 }
 
-function decodeString(string) {
-  return string.slice(string.indexOf(':') + 1, string.length);
+function decodeString(string, lastIndex) {
+  return string.slice(string.indexOf(':') + 1, lastIndex);
+}
+
+
+function decodeTheNumber(string, indexOfI) {
+  const data = [];
+  for (let index = indexOfI; index < string.length; index++) {
+    if (string[index] === 'e') {
+      data.push(decodeNumber(string, indexOfI, index));
+      data.push(index);
+      return data;
+    }
+  }
+}
+
+function isNumber(character) {
+  return typeof parseInt(character) === "number"
 }
 
 function decodeArray(string) {
-  return ["apple", 123, ["banana", -5]];
+  const decodedArray = [];
+  let index = 1;
+  while (index < string.length) {
+    if (string[index] === 'i') {
+      const elements = (decodeTheNumber(string, index));
+      index = elements[1];
+      decodedArray.push(elements[0]);
+    }
+
+    index++;
+  }
+
+  return decodedArray;
+}
+
+function isStartsWithNum(string) {
+  const slicedNumber = string.slice(0, string.indexOf(':'));
+  return typeof parseInt(slicedNumber) === 'number';
 }
 
 function decode(string) {
-  if (string[0] === 'i' && string[string.length - 1] === 'e') {
-    return decodeNumber(string);
+  if (string.startsWith('i')) {
+    return decodeNumber(string, 0, string.indexOf('e'));
   }
-  if (string[0] !== 'l' && string[string.length - 1] !== 'e') {
-    return decodeString(string);
+  if (string.includes(':') && isStartsWithNum(string)) {
+    return decodeString(string, string.length);
   }
-  return decodeArray(string);
+  if (string.startsWith('l')) {
+    return decodeArray(string);
+  }
 }
 
 function createMessage(descrip, symbol, expected, exactOutput) {
   let dataPoints = `\n=> expected:\n${expected}\n`;
-  dataPoints += `=> decoded date:\n${exactOutput} \n`;
+  dataPoints += `=> decoded data:\n${exactOutput} \n`;
   const withOutDataPoints = `${symbol}| ${descrip}`;
   const withDataPoints = `${symbol}| ${descrip}${dataPoints}`;
   const message = symbol === '✅' ? withOutDataPoints : withDataPoints;
@@ -98,11 +133,12 @@ function testForString() {
   testDecode('bencoded string', "10:dilliswara", 'dilliswara');
   testDecode('empty bencoded string', "0:", '');
   testDecode('greeting message', "11:hello world", 'hello world');
+  testDecode('greeting message', "11:hello world", 'hello world');
 }
 
 function testForArrays() {
   console.log(underline("BENCODE ARRAY"))
-  testDecode('bencoded array', "l5:applei123el6:bananai-5eee", ["apple", 123, ["banana", -5]]);
+  testDecode('bencoded array', "li3ei4ei12ee", [3, 4, 12]);
 }
 
 testForNumericBencode();
