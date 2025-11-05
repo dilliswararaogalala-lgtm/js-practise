@@ -23,16 +23,31 @@ function isNumber(character) {
   return typeof parseInt(character) === "number"
 }
 
+function decodeTheString(string, index) {
+  const data = [];
+  const indexOfColomn = string.indexOf(":");
+  const lengthOfString = parseInt(string.slice(index, string.indexOf(':')));
+  const lastIndexOfString = indexOfColomn + lengthOfString + 1
+  data.push(decodeString(string, lastIndexOfString));
+  data.push(lastIndexOfString);
+  return data;
+}
+
 function decodeArray(string) {
   const decodedArray = [];
   let index = 1;
-  while (index < string.length) {
+  while (index < string.length - 1) {
     if (string[index] === 'i') {
       const elements = (decodeTheNumber(string, index));
       index = elements[1];
       decodedArray.push(elements[0]);
-    }
+    } else if (isNumber(string[index])) {
+      const elements = decodeTheString(string, index);
+      index = elements[1];
+      decodedArray.push(elements[0]);
+    } else if (string[index] === 'l') {
 
+    }
     index++;
   }
 
@@ -40,8 +55,8 @@ function decodeArray(string) {
 }
 
 function isStartsWithNum(string) {
-  const slicedNumber = string.slice(0, string.indexOf(':'));
-  return typeof parseInt(slicedNumber) === 'number';
+  const number = '0123456789'
+  return number.includes(string[0]);
 }
 
 function decode(string) {
@@ -139,6 +154,7 @@ function testForString() {
 function testForArrays() {
   console.log(underline("BENCODE ARRAY"))
   testDecode('bencoded array', "li3ei4ei12ee", [3, 4, 12]);
+  testDecode('bencoded array', "l5:helloe", ['hello']);
 }
 
 testForNumericBencode();
