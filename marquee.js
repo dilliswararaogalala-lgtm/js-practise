@@ -20,7 +20,7 @@ const putName = (board, { name, x, y }) => {
   const charactersList = name.split("");
 
   for (const character of charactersList) {
-    board[x][wrap(y,WIDTH)] = character;
+    board[wrap(x, HEIGHT)][wrap(y, WIDTH)] = character;
     y = y + 1;
   }
 };
@@ -36,28 +36,13 @@ const putNameInXAxis = (board, { name, x, y }) => {
 
 const putNameInDiagonal = (board, { name, x, y }) => {
   const charactersOfName = name.split("");
-  const height = board.length;
-  const width = board[0].length;
+
   for (const character of charactersOfName) {
-    board[((x % height) + height) % height][((y % width) + width) % width] =
-      character;
-    x = x + 1;
+    board[wrap(x, HEIGHT)][wrap(y, WIDTH)] = character;
     y = y + 1;
+    x = x + 1;
   }
 };
-
-
-const marquees = [
-  { name: "dilli", x: 1, y: 10, direction: "r", speed: 3 },
-  { name: "hemanth", x: 0, y: 0, direction: "f", speed: 1 },
-  { name: "khasim", x: 5, y: 4, direction: "f", speed: 2 },
-  { name: "nikhil", x: 6, y: 4, direction: "r", speed: 4 },
-  { name: "himanshu", x: 9, y: -1, direction: "f", speed: 3 },
-  { name: "dilli", x: 1, y: 10, direction: "v", speed: 1 },
-  { name: "ramana", x: 15, y: 5, direction: "vr", speed: 2 },
-  { name: "pradip", x: 4, y: 5, direction: "d", speed: 3 },
-  { name: "pooji", x: 4, y: 1, direction: "dr", speed: 1 },
-];
 
 const moveForward = (marquee, board) => {
   marquee.y = (marquee.y + marquee.speed) % WIDTH;
@@ -80,16 +65,22 @@ const moveVerticalReverse = (marquee, board) => {
 };
 
 const moveDiagonal = (marquee, board) => {
-  marquee.x = (marquee.x + marquee.speed) % HEIGHT;
+  marquee.x = (marquee.x + 1) % HEIGHT;
   marquee.y = (marquee.y + marquee.speed) % WIDTH;
-  putNameInDiagonal(board, marquee);
+  putName(board, marquee);
 };
 
 const moveDiagonalReverse = (marquee, board) => {
   marquee.x = (marquee.x - 1) % HEIGHT;
-  marquee.y = (marquee.y - 1) % WIDTH;
-  putNameInDiagonal(board, marquee);
-}
+  marquee.y = (marquee.y - marquee.speed) % WIDTH;
+  putName(board, marquee);
+};
+
+const verticalDiagonal = (marquee, board) => {
+  marquee.x = (marquee.x + 1) % HEIGHT;
+  marquee.y = (marquee.y + 1) % WIDTH;
+  putNameInXAxis(board, marquee);
+};
 
 const directionToGo = {
   f: moveForward,
@@ -97,8 +88,22 @@ const directionToGo = {
   v: moveVertical,
   vr: moveVerticalReverse,
   d: moveDiagonal,
-  dr: moveDiagonalReverse
+  dr: moveDiagonalReverse,
+  vd: verticalDiagonal,
 };
+
+const marquees = [
+  // { name: "dilli", x: 1, y: 10, direction: "r", speed: 1 },
+  //{ name: "hemanth", x: 0, y: 0, direction: "f", speed: 1 },
+  // { name: "khasim", x: 5, y: 4, direction: "f", speed: 2 },
+  // { name: "nikhil", x: 6, y: 4, direction: "r", speed: 4 },
+  // { name: "himanshu", x: 9, y: -1, direction: "f", speed: 1 },
+  // { name: "dilli", x: 1, y: 10, direction: "v", speed: 1 },
+  // { name: "ramana", x: 15, y: 5, direction: "vr", speed: 2 },
+  // { name: "pradip", x: 4, y: 5, direction: "d", speed: 3 },
+  // { name: "pooji", x: 4, y: 1, direction: "dr", speed: 1 },
+  { name: "pooji", x: 4, y: 1, direction: "vd", speed: 1 },
+];
 
 const step = () => {
   console.clear();
