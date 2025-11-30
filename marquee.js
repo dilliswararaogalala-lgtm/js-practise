@@ -1,6 +1,8 @@
 const WIDTH = 30;
 const HEIGHT = 10;
 
+const wrap = (n, size) => ((n % size) + size) % size;
+
 const screen = (rows, cols) => {
   const spaces = [];
   for (let row = 0; row < rows; row++) {
@@ -16,23 +18,34 @@ const displayBoard = (board) => {
 
 const putName = (board, { name, x, y }) => {
   const charactersList = name.split("");
-  const width = board[x].length;
 
   for (const character of charactersList) {
-    board[x][((y % width) + width) % width] = character;
+    board[x][wrap(y,WIDTH)] = character;
     y = y + 1;
   }
 };
 
-const putNameInXAxis = (board, {name, x, y}) => {
-  const charactersOfName = name.split('');
-  const height = board.length;
+const putNameInXAxis = (board, { name, x, y }) => {
+  const charactersOfName = name.split("");
 
   for (const character of charactersOfName) {
-    board[((x % height) + height) % height][y] = character;
+    board[wrap(x, HEIGHT)][y] = character;
     x = x + 1;
   }
-}
+};
+
+const putNameInDiagonal = (board, { name, x, y }) => {
+  const charactersOfName = name.split("");
+  const height = board.length;
+  const width = board[0].length;
+  for (const character of charactersOfName) {
+    board[((x % height) + height) % height][((y % width) + width) % width] =
+      character;
+    x = x + 1;
+    y = y + 1;
+  }
+};
+
 
 const marquees = [
   { name: "dilli", x: 1, y: 10, direction: "r", speed: 3 },
@@ -42,6 +55,8 @@ const marquees = [
   { name: "himanshu", x: 9, y: -1, direction: "f", speed: 3 },
   { name: "dilli", x: 1, y: 10, direction: "v", speed: 1 },
   { name: "ramana", x: 15, y: 5, direction: "vr", speed: 2 },
+  { name: "pradip", x: 4, y: 5, direction: "d", speed: 3 },
+  { name: "pooji", x: 4, y: 1, direction: "dr", speed: 1 },
 ];
 
 const moveForward = (marquee, board) => {
@@ -57,11 +72,23 @@ const moveReverse = (marquee, board) => {
 const moveVertical = (marquee, board) => {
   marquee.x = (marquee.x + marquee.speed) % HEIGHT;
   putNameInXAxis(board, marquee);
-}
+};
 
 const moveVerticalReverse = (marquee, board) => {
   marquee.x = (marquee.x - marquee.speed) % HEIGHT;
   putNameInXAxis(board, marquee);
+};
+
+const moveDiagonal = (marquee, board) => {
+  marquee.x = (marquee.x + marquee.speed) % HEIGHT;
+  marquee.y = (marquee.y + marquee.speed) % WIDTH;
+  putNameInDiagonal(board, marquee);
+};
+
+const moveDiagonalReverse = (marquee, board) => {
+  marquee.x = (marquee.x - 1) % HEIGHT;
+  marquee.y = (marquee.y - 1) % WIDTH;
+  putNameInDiagonal(board, marquee);
 }
 
 const directionToGo = {
@@ -69,6 +96,8 @@ const directionToGo = {
   r: moveReverse,
   v: moveVertical,
   vr: moveVerticalReverse,
+  d: moveDiagonal,
+  dr: moveDiagonalReverse
 };
 
 const step = () => {
