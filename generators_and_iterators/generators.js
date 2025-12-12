@@ -16,8 +16,8 @@ console.log([...iterator]);
 //   [1,2,3,4,5] => [[1,2],[2,3],[3,4],[4,5]]
 
 const consecutivePair = function* (data) {
-  for(const number of data){
-    yield [ number, number + 1]
+  for (let index = 0; index < data.length - 1; index++) {
+    yield [data[index], data[index + 1]];
   }
 };
 
@@ -27,12 +27,12 @@ console.log([...ite]);
 // Generate a cycle of elements
 //   [1,2,3,4,5] => [1,2,3,4,5,1,2,3,4,5,...]
 const cycleOfElements = function* (data) {
-  while(true){
+  while (true) {
     for (const number of data) {
-      yield number
+      yield number;
     }
   }
-}
+};
 
 //const iterator = cycleOfElements([1,2,3,4,5])
 // Iterate over lines of text
@@ -41,14 +41,14 @@ const cycleOfElements = function* (data) {
 const iteratorOverLines = function* (data) {
   let sentence = "";
   for (let index = 0; index < data.length; index++) {
-    if(data[index] === "\n") {
+    if (data[index] === "\n") {
       yield sentence;
-      sentence = ""
+      sentence = "";
     } else {
       sentence += data[index];
     }
   }
-  if(sentence.length > 0) yield sentence;
+  if (sentence.length !== 0) yield sentence;
 };
 
 const iter = iteratorOverLines("this\nis\ngood");
@@ -57,5 +57,3 @@ console.log([...iter]);
 // partition by
 //   identity: [1,1,1,2,2,1,1,3,3,2] => [[1,1,1],[2,2],[1,1],[3,3],[2]]
 //   isEven: [1,3,1,2,2,1,1,3,5,2] => [[1,3,1],[2,2],[1,1,3,5],[2]]
-
-
