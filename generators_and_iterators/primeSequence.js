@@ -16,3 +16,6 @@ const primeNumberSeries = function* () {
     i++;
   }
 };
+
+const iterate = primeNumberSeries();
+iterate.next();
