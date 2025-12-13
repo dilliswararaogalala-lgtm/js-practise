@@ -39,16 +39,16 @@ const cycleOfElements = function* (data) {
 //   "this\nis\ngood" => ['this','is','good']
 
 const iteratorOverLines = function* (data) {
-  let sentence = "";
-  for (let index = 0; index < data.length; index++) {
-    if (data[index] === "\n") {
-      yield sentence;
-      sentence = "";
-    } else {
-      sentence += data[index];
+  let i = 0;
+  while (true) {
+    const index = data.indexOf("\n", i + 1);
+    if (index === -1) {
+      yield data.slice(i);
+      break;
     }
+    yield data.slice(i, index);
+    i = index + 1;
   }
-  if (sentence.length !== 0) yield sentence;
 };
 
 const iter = iteratorOverLines("this\nis\ngood");
@@ -57,3 +57,36 @@ console.log([...iter]);
 // partition by
 //   identity: [1,1,1,2,2,1,1,3,3,2] => [[1,1,1],[2,2],[1,1],[3,3],[2]]
 //   isEven: [1,3,1,2,2,1,1,3,5,2] => [[1,3,1],[2,2],[1,1,3,5],[2]]
+const partition1 = function* (data) {
+  let partition = [data[0]];
+  for (let index = 0; index < data.length; index++) {
+    if (partition.includes(data[index + 1])) {
+      partition.push(data[index + 1]);
+    } else {
+      yield partition;
+      partition = [data[index + 1]];
+    }
+  }
+};
+
+const isEven = (x) => x % 2 === 0;
+const isOdd = (x) => x % 2 !== 0;
+
+const isBothSame = (x, y, predicate) => predicate(x) && predicate(y);
+
+const partition2 = function* (data) {
+  let partition = [data[0]];
+  for (let index = 0; index < data.length; index++) {
+    if (
+      isBothSame(data[index], data[index + 1], isEven) ||
+      isBothSame(data[index], data[index + 1], isOdd)
+    ) {
+      partition.push(data[index + 1]);
+    } else {
+      yield partition;
+      partition = [data[index + 1]];
+    }
+  }
+};
+
+const iterat = partition2([1, 3, 1, 2, 2, 1, 1, 3, 5, 2]);
