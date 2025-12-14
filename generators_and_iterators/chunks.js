@@ -4,18 +4,20 @@
 //   3,2: [1,2,3,4,5] => [[1,2,3],[2,3,4],[3,4,5]];
 
 const chunks = function* (data, sizeOfEachChunk, common = 0) {
-  let chunk = [];
-  let i = 0;
-  while (i < data.length) {
-    chunk.push(data[i]);
-    if (chunk.length === sizeOfEachChunk) {
-      yield chunk;
-      chunk = [];
+  let index = 0;
+  while (index < data.length) {
+    const chunks = [];
+    let count = 0;
+    while (count < sizeOfEachChunk) {
+      if (data[index] !== undefined) chunks.push(data[index]);
+      count++;
+      index++;
     }
-    i++;
+    index -= common;
+    yield chunks;
+    if (chunks[2] === data[data.length - 1]) break;
   }
-  if (chunk.length > 0) yield chunk;
 };
 
-const iterator = chunks([1, 2, 3, 4, 5, 6, 7, 8], 3);
+const iterator = chunks([1, 2, 3, 4, 5, 6, 7], 3, 1);
 console.log([...iterator]);
