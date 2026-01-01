@@ -1,0 +1,61 @@
+What is a generator function in JavaScript?	A generator function is a special function that can pause execution and resume later using the yield keyword.
+
+How do you define a generator function?	A generator function is defined using function* syntax.
+
+What keyword is used to pause a generator?	The yield keyword pauses the generator and returns a value.
+
+What does calling a generator function return?	Calling a generator function returns a generator object, not the function result.
+
+How do you start or resume execution of a generator?	By calling the next() method on the generator object.
+
+What is the structure of the value returned by next()?	next() returns an object with properties { value, done }.
+
+What does the done property indicate?	done is true when the generator has finished execution, otherwise false.
+
+Can a generator yield multiple values?	Yes, a generator can yield values multiple times.
+
+What happens when a generator finishes execution?	The done property becomes true and no further values are yielded.
+
+Can generators be iterated using for...of?	Yes, generators are iterable and work with for...of loops.
+
+What happens if you use return inside a generator?	The generator ends and the returned value becomes the final value.
+
+What is the difference between yield and return in a generator?	yield pauses execution, return ends the generator.
+
+Can you pass values into a generator?	Yes, values can be passed using generator.next(value).
+
+What does the first next() call argument do?	The first next() argument is ignored because execution has not reached a yield yet.
+
+What is lazy evaluation in generators?	Generators produce values only when requested, not all at once.
+
+Why are generators memory efficient?	They generate values on demand instead of storing all values in memory.
+
+Can generators be infinite?	Yes, generators can produce infinite sequences using loops.
+
+How do generators differ from normal functions?	Generators can pause and resume execution, normal functions cannot.
+
+Can generators throw errors?	Yes, errors can be thrown into generators using generator.throw().
+
+What is generator.throw()?	It injects an error into the generator at the current pause point.
+
+What is generator.return()?	It forces the generator to finish execution early.
+
+Are generators synchronous or asynchronous?	Generators are synchronous by default.
+
+What is the difference between generators and async functions?	Generators pause with yield, async functions pause with await and return promises.
+
+Can generators be used to build custom iterators?	Yes, generators simplify creating custom iterators.
+
+What symbol makes generators iterable?	Generators implement the Symbol.iterator protocol.
+
+What happens if you call next() after done is true?	It returns { value: undefined, done: true }.
+
+Can a generator yield expressions?	Yes, yield can return any expression value.
+
+Can generators be nested?	Yes, generators can call other generators.
+
+What does yield* do?	yield* delegates iteration control to another iterable.
+
+Can arrays be yielded using yield*?	Yes, yield* can be used with arrays and other iterables.
+
+Why are generators useful?	They simplify iteration, manage state, and handle large or infinite data streams efficiently.

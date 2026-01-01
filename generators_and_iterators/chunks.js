@@ -19,5 +19,5 @@ const chunks = function* (data, sizeOfEachChunk, common = 0) {
   }
 };
 
-const iterator = chunks([1, 2, 3, 4, 5, 6, 7], 3, 1);
+const iterator = chunks([1, 2, 3, 4, 5, 6, 7], 4, 3);
 console.log([...iterator]);
