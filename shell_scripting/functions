@@ -1,0 +1,13 @@
+#!/bin/zsh
+GUEST="1"
+# Define the function
+greet_user() {
+    local GUEST=$1  # 'local' means this variable only exists inside this function
+    echo "Hello, $GUEST! Welcome to the script."
+}
+
+# Call the function with different names
+greet_user "Alice"
+greet_user "Bob"
+
+echo $GUEST

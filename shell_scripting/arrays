@@ -1,0 +1,5 @@
+FOLDERS=("Images" "Documents" "Videos")
+
+for folder in "${FOLDERS[@]}"; do
+echo "Creating directory: $folder"
+done
