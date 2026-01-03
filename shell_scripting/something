@@ -1,0 +1,9 @@
+#!/bin/zsh
+
+TODAY=$(date)
+USER_COUNT=$(who | wc -l)
+
+echo "today is $TODAY"
+echo "Today is $1"
+echo "something $2"
+echo "There are $USER_COUNT users logged in."
