@@ -1,55 +1,30 @@
-const dbg = (x) => {
-  console.log(x);
-  return x;
-};
-
-const task = (filePath) => {
-  const start = Date.now();
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      Deno.readTextFile(filePath);
-      const duration = Date.now() - start;
-      resolve(duration);
-    }, 2000);
-  });
-};
-
-const determineMode = (result, duration) => {
-  const serialMode = {
-    mode: "Serial",
-    duration,
-  };
-
-  const parallelMode = {
-    mode: "Parallel",
-    duration,
-  };
-
-  return result.length !== 1 ? parallelMode : serialMode;
+const task = async (filePath, mode, delay = 2000) => {
+  const startTime = Date.now();
+  await new Promise((resolve, _) => setTimeout(resolve, delay));
+  const content = await Deno.readTextFile(filePath).catch((_) =>
+    "file not found"
+  );
+  const endTime = Date.now();
+  return { content, mode, startTime, endTime, duration: endTime - startTime };
 };
 
 const performTask = async (tasks) => {
   const parsedTasks = tasks.split(",");
-  const startTime = Date.now();
-  const taskResults = parsedTasks.map(async (taskFilePath) =>
-    await task(taskFilePath)
+  const mode = parsedTasks.length !== 1 ? "parallel" : "serial";
+  const taskResults = parsedTasks.map((taskFilePath) =>
+    task(taskFilePath, mode)
   );
-  const result = await Promise.all(taskResults);
-  const duration = Date.now() - startTime;
-  return determineMode(result, duration);
+  return await Promise.all(taskResults);
 };
 
 const performTasks = async (tasks) => {
   for (const task of tasks) {
-    console.log(`${task} is started\n`);
-    dbg(await performTask(task));
-    console.log(`\n${task} is ended\n`);
+    console.log(await performTask(task));
   }
 };
 
-const readAndPerformTasks = async (sourceFilePath) => {
-  const tasks = (await Deno.readTextFile(sourceFilePath)).split("\n");
-  await performTasks(tasks);
+export const readAndPerformTasks = async (taskFilePath) => {
+  const tasks = (await Deno.readTextFile(taskFilePath)).split("\n");
+  return performTasks(tasks);
 };
 
-readAndPerformTasks("receipes/tasks");
