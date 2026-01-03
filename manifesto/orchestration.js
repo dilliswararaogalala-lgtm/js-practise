@@ -18,4 +18,4 @@ const cookRecipes = async (recipesFilePath) => {
   }
 };
 
-cookRecipes("./recipes/manifesto");
+cookRecipes("./recipes/manifest");
