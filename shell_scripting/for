@@ -7,3 +7,10 @@ done
 for i in {1..5}; do
 echo "this is loop number $i"
 done
+
+count=1
+
+while [[ $count -le 6 ]]; do
+echo "count is $count"
+count=$(($count + 1))
+done
