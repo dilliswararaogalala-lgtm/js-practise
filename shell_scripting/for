@@ -1,0 +1,9 @@
+#!/bin/zsh
+
+for name in Apple Banana Cheery; do 
+echo "I like eating $name"
+done
+
+for i in {1..5}; do
+echo "this is loop number $i"
+done
