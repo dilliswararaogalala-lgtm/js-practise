@@ -1,4 +1,4 @@
-What is a generator function in JavaScript?	A generator function is a special function that can pause execution and resume later using the yield keyword.
+12at is a generator function in JavaScript?	A generator function is a special function that can pause execution and resume later using the yield keyword.
 
 How do you define a generator function?	A generator function is defined using function* syntax.
 
@@ -59,3 +59,4 @@ What does yield* do?	yield* delegates iteration control to another iterable.
 Can arrays be yielded using yield*?	Yes, yield* can be used with arrays and other iterables.
 
 Why are generators useful?	They simplify iteration, manage state, and handle large or infinite data streams efficiently.
+12
