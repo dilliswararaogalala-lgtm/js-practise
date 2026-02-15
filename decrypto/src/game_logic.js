@@ -2,7 +2,7 @@ import { generateRandomCode, sendMessage, switchPlayers } from "./helper.js";
 import { readCode, readHints } from "./players_side.js";
 import { printResultMessage } from "./print_result.js";
 
-const checkTheCode = (actualCode, guessedCode, opponent) => {
+const isCorrectCode = (actualCode, guessedCode, opponent) => {
   if (actualCode.join("") === guessedCode.join("")) {
     opponent.score += 1;
     return true;
@@ -25,7 +25,7 @@ export const startTheGame = async ([current, opponent]) => {
     const secretCode = generateRandomCode();
     const hints = await readHints(current, opponent, secretCode);
     const code = await readCode(current, opponent, hints);
-    const isCodeCorrect = checkTheCode(secretCode, code, opponent);
+    const isCodeCorrect = isCorrectCode(secretCode, code, opponent);
     if (opponent.score === 2) break;
     await printResultMessage(secretCode, isCodeCorrect, current, opponent);
     switchPlayers(players);

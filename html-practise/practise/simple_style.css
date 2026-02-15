@@ -1,0 +1,19 @@
+.intersting {
+  padding: 1em;
+  border: 1px solid black;
+  width: 50%;
+  /* overflow: scroll;
+  white-space: wrap; */
+  margin: 0 auto;
+}
+
+.img-container {
+  margin: 0px auto;
+  width: 100px
+}
+
+img {
+  border: 1px solid black;
+  padding: 1em;
+  width: 100px;
+}

@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MY TABLES</title>
+
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      background-color: #f4f6f8;
+      padding: 40px;
+      color: #333;
+    }
+
+    div {
+      margin-bottom: 60px;
+    }
+
+    h2 {
+      margin-top: 60px;
+    }
+
+    .table {
+      width: 100%;
+      margin-top: 15px;
+      background-color: white;
+      border-collapse: collapse;
+    }
+
+    .table th,
+    .table td {
+      padding: 12px 16px;
+      text-align: left;
+    }
+
+    .basic td,
+    .basic th {
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    /* .basic thead{
+      background-color: rgb(203, 200, 200);
+    } */
+
+    .zebra tbody tr:nth-child(odd) {
+      background: #f9fafb;
+    }
+
+    .zebra tbody tr:hover {
+      background-color: #eef2f7;
+    }
+
+    .bordered {
+      border: 2px solid #9ca3af;
+    }
+
+    .bordered th,
+    .bordered td {
+      border: 1px solid rgb(201, 199, 199)
+    }
+
+    .minimal th {
+      border-bottom: 2px solid black;
+    }
+
+    .minimal td {
+      border-bottom: 1px solid #eee;
+    }
+
+    .minimal tbody tr:hover {
+      background: #f5f5f5;
+    }
+
+    .dark {
+      background-color: #1f2937;
+      color: white;
+    }
+
+    .dark th {
+      background-color: #111827;
+    }
+
+    .dark th,
+    .dark td {
+      border-bottom: 1px solid #374151;
+    }
+
+    .dark tbody tr:hover {
+      background-color: #374151;
+    }
+
+    .sticky thead th {
+      position: sticky;
+      top: 0;
+      background: white;
+      border-bottom: 2px solid #ccc;
+      z-index: 1;
+    }
+
+    .sticky-wrapper {
+      max-height: 200px;
+      overflow-y: scroll;
+      border: 1px solid #ddd;
+    }
+
+    .fixed {
+      table-layout: fixed;
+    }
+
+    .fixed th:nth-child(1) {
+      width: 40%
+    }
+
+    .fixed th:nth-child(2) {
+      width: 30%
+    }
+
+    .fixed th:nth-child(3) {
+      width: 30%
+    }
+
+    .responsive {
+      overflow-x: auto;
+    }
+
+    .badge {
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .success {
+      background: #d1fae5;
+      color: #065f46;
+    }
+
+    .warning {
+      background: #fef3c7;
+      color: #92400e;
+    }
+
+    .danger {
+      background: #fee2e2;
+      color: #991b1b;
+    }
+
+    .compact th,
+    .compact td {
+      padding: 6px 10px;
+      font-size: 13px;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>HTML Table Styling Showcase</h1>
+
+  <div>
+    <h2>1. Simple Basic table</h2>
+    <table class="basic table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>E-mail</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Khasim</td>
+          <td>Khasim@gmail.com</td>
+          <td>Finished</td>
+        </tr>
+        <tr>
+          <td>Dilli</td>
+          <td>dilli@gmail.com</td>
+          <td>Pending</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div>
+    <h2>2. Zebra stripper + Hover</h2>
+    <table class="table zebra">
+      <thead>
+        <tr>
+          <th>Product</th>
+          <th>Price</th>
+          <th>Stock</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Laptop</td>
+          <td>$1500</td>
+          <td>20</td>
+        </tr>
+        <tr>
+          <td>Keyboard</td>
+          <td>$340</td>
+          <td>40</td>
+        </tr>
+        <tr>
+          <td>Tablet</td>
+          <td>$1000</td>
+          <td>10</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div>
+    <h2>3. Full bordered Grid</h2>
+    <table class="table bordered responsive">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Department</th>
+          <th>Manager</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>01</td>
+          <td>Engineering</td>
+          <td>Kane</td>
+        </tr>
+        <tr>
+          <td>02</td>
+          <td>Marketing</td>
+          <td>Vince</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div>
+    <h2>4. Minimal Model</h2>
+    <table class="table minimal">
+      <thead>
+        <tr>
+          <th>Task</th>
+          <th>Owner</th>
+          <th>Due Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Design Ui</td>
+          <td>Anna</td>
+          <td>Feb 15</td>
+        </tr>
+        <tr>
+          <td>Deploy App</td>
+          <td>Mark</td>
+          <td>Feb 20</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div>
+    <h2>5. Dark Theme</h2>
+    <table class="table dark">
+      <thead>
+        <tr>
+          <th>User</th>
+          <th>Role</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Admin</td>
+          <td>Owner</td>
+          <td>Online</td>
+        </tr>
+        <tr>
+          <td>Guest</td>
+          <td>Viewer</td>
+          <td>Offline</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div>
+    <h2>6.Sticky Header(scrollable)</h2>
+    <div class="sticky-wrapper">
+      <table class="table sticky">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Score</th>
+            <th>Grade</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td>Dilli</td>
+            <td>92</td>
+            <td>A</td>
+          </tr>
+          <tr>
+            <td>Khaism</td>
+            <td>92</td>
+            <td>A</td>
+          </tr>
+          <tr>
+            <td>Karthik</td>
+            <td>70</td>
+            <td>B</td>
+          </tr>
+          <tr>
+            <td>Nikhil</td>
+            <td>88</td>
+            <td>B+</td>
+          </tr>
+          <tr>
+            <td>Javed</td>
+            <td>67</td>
+            <td>C</td>
+          </tr>
+          <tr>
+            <td>Hajji</td>
+            <td>45</td>
+            <td>F</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div>
+    <h2>7. Fixed Layout Columns</h2>
+    <table class="table fixed basic">
+      <thead>
+        <tr>
+          <th>Description</th>
+          <th>Category</th>
+          <th>Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>High Performance Laptop with 16GB RAM</td>
+          <td>Electronics</td>
+          <td>$1500</td>
+        </tr>
+        <tr>
+          <td>Office chair ergonomic design</td>
+          <td>Furniture</td>
+          <td>$300</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div>
+    <h2>8. Responsive Wide Table</h2>
+    <table class="table bordered">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Phone</th>
+          <th>Department</th>
+          <th>Location</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1001</td>
+          <td>Sarah</td>
+          <td>sarah@email.com</td>
+          <td>555-1234</td>
+          <td>HR</td>
+          <td>New York</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div>
+    <h2>9. Table with Status Badges</h2>
+    <table class="table zebra">
+      <thead>
+        <tr>
+          <th>Order</th>
+          <th>Customer</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>#1001</td>
+          <td>Alice</td>
+          <td><span class="badge success">Completed</span></td>
+        </tr>
+        <tr>
+          <td>#1002</td>
+          <td>Bob</td>
+          <td><span class="badge warning">Pending</span></td>
+        </tr>
+        <tr>
+          <td>#1003</td>
+          <td>Charlie</td>
+          <td><span class="badge danger">Cancelled</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div>
+    <h2>10. Compact Table</h2>
+    <table class="table bordered compact">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Score</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>Alex</td>
+          <td>88</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>Sam</td>
+          <td>91</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,28 @@
+body {
+  font-family: sans-serif;
+}
+
+h1 {
+  color: black;
+  font-weight: 300;
+}
+
+h2 {
+  color: black;
+  font-weight: 300;
+}
+
+p {
+  color: #999;
+  font-weight: 200;
+}
+
+div {
+  color: green;
+  font-weight: 600;
+}
+
+.standard{
+  color: rgb(52, 139, 139);
+  font-weight: 700;
+}
