@@ -1,0 +1,164 @@
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  color: black;
+  padding: 20px;
+  background-color: hsl(0deg 0% 50% / 12.1%);
+}
+
+span {
+  font-family: serif;
+  font-weight: 500;
+  font-size: 15px;
+}
+
+:root {
+  --steel-type: hsla(210, 15%, 70%, 1);
+  --fairy-type: hsla(330, 70%, 70%, 1);
+  --normal-type: hsla(40, 20%, 60%, 1);
+  --fire-type: hsla(10, 85%, 55%, 1);
+  --water-type: hsla(210, 80%, 55%, 1);
+  --electric-type: hsla(50, 100%, 50%, 0.8);
+  --grass-type: hsla(120, 50%, 45%, 1);
+  --ice-type: hsla(190, 80%, 75%, 1);
+  --fighting-type: hsla(0, 70%, 45%, 1);
+  --poison-type: hsla(280, 60%, 50%, 1);
+  --ground-type: hsla(35, 60%, 50%, 1);
+  --flying-type: hsla(220, 70%, 75%, 1);
+  --psychic-type: hsla(320, 85%, 60%, 1);
+  --bug-type: hsla(90, 65%, 40%, 1);
+  --rock-type: hsla(30, 25%, 45%, 1);
+  --ghost-type: hsla(260, 60%, 45%, 1);
+  --dragon-type: hsla(250, 70%, 50%, 1);
+  --dark-type: hsla(25, 35%, 25%, 1);
+}
+
+.overflow-cards {
+  width: 100%;
+  height: 100%;
+  overflow: scroll;
+}
+
+.pokei-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: center;
+  gap: 25px;
+}
+
+.card {
+  width: 18%;
+  border: 2px solid rgb(218, 218, 218);
+  border-radius: 10px;
+  padding: 15px;
+  background-color: hsla(50, 100%, 50%, 0.3);
+}
+
+.card:hover {
+  box-shadow: 8px 5px 5px rgb(101, 101, 101);
+  cursor: pointer;
+}
+
+.image-container img {
+  width: 100%;
+  background-image: linear-gradient(45deg, grey, purple);
+  border-radius: 10px;
+  margin-bottom: 5px;
+}
+
+.stats {
+  margin-top: 5px;
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 6px;
+  border-bottom: 1px solid hsl(0 0% 69% / 1);
+}
+
+.type-conatiner {
+  display: flex;
+  justify-content: center;
+  gap: 3px;
+}
+
+.type {
+  padding: 2px;
+  border-radius: 9.3px;
+}
+
+.fairy {
+  background-color: var(--fairy-type);
+}
+
+.normal {
+  background-color: var(--normal-type);
+}
+
+.fire {
+  background-color: var(--fire-type);
+}
+
+.water {
+  background-color: var(--water-type);
+}
+
+.electric {
+  background-color: var(--electric-type);
+}
+
+.grass {
+  background-color: var(--grass-type);
+}
+
+.ice {
+  background-color: var(--ice-type);
+}
+
+.fighting {
+  background-color: var(--fighting-type);
+}
+
+.poison {
+  background-color: var(--poison-type);
+}
+
+.ground {
+  background-color: var(--ground-type);
+}
+
+.flying {
+  background-color: var(--flying-type);
+}
+
+.psychic {
+  background-color: var(--psychic-type);
+}
+
+.bug {
+  background-color: var(--bug-type);
+  color: white;
+
+}
+
+.rock {
+  background-color: var(--rock-type);
+}
+
+.ghost {
+  background-color: var(--ghost-type);
+}
+
+.dragon {
+  background-color: var(--dragon-type);
+}
+
+.dark {
+  background-color: var(--dark-type);
+}
+
+.steel {
+  background-color: var(--steel-type);
+}
+
+.fairy {
+  background-color: var(--fairy-type);
+}
